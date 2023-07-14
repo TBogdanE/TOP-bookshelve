@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="design.css">
+    <title>Book Shelter</title>
+</head>
+
+<body>
+    <header>
+        <div id="page-title">Your book shelter</div>
+        <div id="user-greetings">Hello!</div>
+    </header>
+    <div id="overlay">
+        <div id="card-overlay">
+            <div class="card-overlay-text">
+                <label for="overlay-title">Book Title</label>
+                <input type="text" id="overlay-title" name="overlay-title" required>
+            </div>
+            <div class="card-overlay-text">
+                <label for="overlay-author">Book Author</label>
+                <input type="text" id="overlay-author" name="overlay-author" required>
+            </div>
+            <div class="card-overlay-text">
+                <label for="overlay-pages">Number of pages</label>
+                <input type="number" id="overlay-pages" name="overlay-pages" required>
+            </div>
+            <div class="card-overlay-buttons">
+                <button type="submit" id="overlay-card-add-book-btn">
+                    Add
+                </button>
+                <button id="overlay-card-cancel-book-btn">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <main>
+        <div id="card-add-book-box">
+            <button id="add-new-book-btn">+</button>
+        </div>
+
+        <div class="card-book-box">
+            <div class="card-book-box-text">
+                <div class="card-title">
+                    Title
+                </div>
+                <div class="card-author">- Author -</i>
+                </div>
+                <div class="card-pages">
+                    Pages
+                </div>
+                <div class="card-date">
+                    20 Iulie 2023
+                </div>
+            </div>
+            <div class="card-book-box-buttons">
+                <button class="read-book-btn">
+                    Citit
+                </button>
+                <button class="delete-book-btn">
+                    Delete
+                </button>
+            </div>
+        </div>
+        
+
+    </main>
+    <div id="right-menu">
+        <div id="right-menu-title">
+            Stats
+        </div>
+        <div class="right-menu-text">
+            Numbers of books:
+            <div id="numbooks" class="right-menu-numbers">
+                100
+            </div>
+        </div>
+        <div class="right-menu-text">
+            Number of readed books:
+            <div id="numbooks-read" class="right-menu-numbers">
+                10
+            </div>
+        </div>
+        <div class="right-menu-text">
+            Number of readed pages:
+            <div id="numpages" class="right-menu-numbers">
+                101010
+            </div>
+        </div>
+    </div>
+    <footer>
+
+    </footer>
+    <script src="book.js"></script>
+</body>
+
+</html>
