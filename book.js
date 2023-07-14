@@ -11,31 +11,26 @@ let bookCollection = [];
 
 //EVENT LISTENERS
 newBookBtn.addEventListener('click', overlayToggle);
-overlayAddBtn.addEventListener('click', submitOverlayBook);
+overlayAddBtn.addEventListener('click', overlayCheckInput);
 overlayCancelBtn.addEventListener('click', overlayToggle);
 
 document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        if (checkOverflowStatus() === 'flex') {
-            overlayToggle();
-        }
-    } else if (event.key === 'Enter') {
-        if (checkOverflowStatus() === 'flex') {
-            if (event.target.tagName !== 'INPUT') {
-                submitOverlayBook();
-                event.preventDefault();
-            }
+    if (event.key === 'Escape' && checkOverflowStatus() === 'flex') {
+        overlayToggle();
+    } else if (event.key === 'Enter' && checkOverflowStatus() === 'flex') {
+        if (event.target.tagName !== 'INPUT') {
+            overlayCheckInput();
+            event.preventDefault();
         }
     }
-})
+});
 
 
 //FUNCTIONS
 
 //checks if the overlay is shown or no
 function checkOverflowStatus() {
-    let status = window.getComputedStyle(overlayBox).display;
-    return status;
+    return window.getComputedStyle(overlayBox).display;
 }
 
 //shows or hides the overlay
@@ -45,6 +40,17 @@ function overlayToggle() {
     } else {
         overlayBox.style.display = 'none';
         overlayClearInputs();
+    }
+}
+
+function overlayCheckInput() {
+    if (document.getElementById('overlay-title').value === ''
+        || document.getElementById('overlay-author').value === ''
+        || document.getElementById('overlay-pages').value === '') {
+        console.log('Error, one of the inputs are empty')
+    } else {
+        submitOverlayBook();
+        console.log('OK!');
     }
 }
 
@@ -117,7 +123,7 @@ function createBookCard(book) {
 /*
 NEXT:
 - delete button on overlay card
-- fix bug with enter key on overlay card
+- DONE - fix bug with enter key on overlay card
 - make the info panel work
 
 */
