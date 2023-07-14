@@ -51,6 +51,7 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
 /************************OVERLAY CARD************************/
 #overlay {
     display: none;
@@ -59,13 +60,13 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.4); 
-    backdrop-filter: blur(5px); 
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
     z-index: 9999;
     transition: 0.1s ease-in-out;
-  }
+}
 
-#card-overlay {
+ #card-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,6 +83,15 @@ a {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
 }
 
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
 .card-overlay-text {
     display: flex;
     justify-content: flex-start;
@@ -90,10 +100,10 @@ a {
     font-size: 1.2em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 0.5em;
-    width: 80%;
+    width: 70%;
 }
 
-.card-overlay-text > input {
+.card-overlay-text>input {
     border-radius: 10px;
     height: 1.5em;
     width: 80%;
@@ -111,7 +121,7 @@ a {
 }
 
 #overlay-card-add-book-btn {
-    width: 80%;
+    width: 70%;
     height: 3em;
     color: white;
     background-color: rgb(86, 241, 75);
@@ -131,7 +141,7 @@ a {
 }
 
 #overlay-card-cancel-book-btn {
-    width: 80%;
+    width: 70%;
     height: 3em;
     color: white;
     background-color: rgb(245, 77, 77);
