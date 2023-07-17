@@ -18,21 +18,24 @@
             <form>
                 <div class="card-overlay-text">
                     <label for="overlay-title">Book Title</label>
-                    <input type="text" id="overlay-title" name="overlay-title" required>
+                    <input type="text" id="overlay-title" name="overlay-title" minlength="4" maxlength="30" required>
                 </div>
                 <div class="card-overlay-text">
                     <label for="overlay-author">Book Author</label>
-                    <input type="text" id="overlay-author" name="overlay-author" required>
+                    <input type="text" id="overlay-author" name="overlay-author"  minlength="4" maxlength="15" required>
                 </div>
                 <div class="card-overlay-text">
                     <label for="overlay-pages">Number of pages</label>
-                    <input type="number" id="overlay-pages" name="overlay-pages" required>
+                    <input type="number" id="overlay-pages" name="overlay-pages"  min="1" max="10" required>
                 </div>
                 <div class="card-overlay-buttons">
+                    <button type="button" class="read-book-btn" id="overlay-card-read-book-btn">
+                        Read it? No
+                    </button>
                     <button type="submit" id="overlay-card-add-book-btn">
                         Add
                     </button>
-                    <button id="overlay-card-cancel-book-btn">
+                    <button type="button" id="overlay-card-cancel-book-btn">
                         Cancel
                     </button>
                 </div>
@@ -59,10 +62,10 @@
                 </div>
             </div>
             <div class="card-book-box-buttons">
-                <button class="read-book-btn">
+                <button class="read-book-btn" id="card-read-book-btn">
                     Read
                 </button>
-                <button class="delete-book-btn">
+                <button class="delete-book-btn" id="card-delete-book-btn">
                     Delete
                 </button>
             </div>
@@ -77,19 +80,19 @@
         <div class="right-menu-text">
             Numbers of books:
             <div id="numbooks" class="right-menu-numbers">
-                100
+                0
+            </div>
+        </div>
+        <div class="right-menu-text">
+            Number of pages:
+            <div id="numpages" class="right-menu-numbers">
+                0
             </div>
         </div>
         <div class="right-menu-text">
             Number of readed books:
             <div id="numbooks-read" class="right-menu-numbers">
-                10
-            </div>
-        </div>
-        <div class="right-menu-text">
-            Number of readed pages:
-            <div id="numpages" class="right-menu-numbers">
-                101010
+                0
             </div>
         </div>
     </div>

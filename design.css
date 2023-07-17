@@ -257,7 +257,19 @@ form {
 }
 
 .read-book-btn {
-    width: 80%;
+    width: 70%;
+    height: 3em;
+    color: white;
+    background-color: rgb(245, 77, 77);
+    border: 0.1em solid rgb(75, 75, 75);
+    border-radius: 10px;
+    transition: 0.1s ease-in-out;
+    overflow: hidden;
+    margin: 0.5em;
+}
+
+.read-book-btn-active {
+    width: 70%;
     height: 3em;
     color: white;
     background-color: rgb(86, 241, 75);
@@ -265,6 +277,7 @@ form {
     border-radius: 10px;
     transition: 0.1s ease-in-out;
     overflow: hidden;
+    margin: 0.5em;
 }
 
 .read-book-btn:hover {
@@ -276,7 +289,7 @@ form {
 }
 
 .delete-book-btn {
-    width: 80%;
+    width: 70%;
     height: 3em;
     color: white;
     background-color: rgb(245, 77, 77);
@@ -320,7 +333,7 @@ form {
     text-align: center;
     font-size: 1.3em;
     font-family: "Raleway", sans-serif;
-    color: rgb(75 75, 75);
+    color: rgb(75, 75, 75);
 }
 
 .right-menu-numbers {
