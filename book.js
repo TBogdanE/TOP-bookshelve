@@ -101,7 +101,7 @@ function overlayClearInputs() {
 function submitOverlayBook() {
     let bookInfo = {
         title: document.getElementById('overlay-title').value,
-        author: document.getElementById('overlay-author').value,
+        author: `- ${document.getElementById('overlay-author').value} -`,
         page: document.getElementById('overlay-pages').value,
         read: overlayReadStatus,
         date: new Date(),
