@@ -43,7 +43,7 @@ document.addEventListener('keydown', function (event) {
 });
 
 
-//FUNCTIONS
+//FUNCTIONS 
 
 //checks if the overlay is shown or not
 function checkOverflowStatus() {
@@ -154,17 +154,25 @@ function createBookCard(book) {
     cardButtons.setAttribute('class', 'card-book-box-buttons');
 
     let cardReadBtn = document.createElement('button');
-    cardReadBtn.textContent = 'Read';
-    cardReadBtn.setAttribute('class', 'card-read-book-btn');
+    if (book.read === true) {
+        cardReadBtn.textContent = 'Read it';
+        cardReadBtn.setAttribute('class', 'card-read-book-btn-active');
+    } else {
+        cardReadBtn.textContent = 'Didn\'t read it';
+        cardReadBtn.setAttribute('class', 'card-read-book-btn');
+    }
     cardReadBtn.setAttribute('type', 'button');
+    cardReadBtn.addEventListener('click', function () {
+        cardReadButton(book.id, cardReadBtn);
+    });
 
     let cardDeleteBtn = document.createElement('button');
     cardDeleteBtn.setAttribute('id', 'card-delete-book-btn');
     cardDeleteBtn.setAttribute('class', 'card-delete-book-btn');
     cardDeleteBtn.textContent = 'Delete';
     cardDeleteBtn.setAttribute('type', 'button');
-    cardDeleteBtn.addEventListener('click', function() {
-        deleteBook(book.id);
+    cardDeleteBtn.addEventListener('click', function () {
+        cardDeleteBook(book.id);
     });
 
     main.appendChild(card);
@@ -176,11 +184,28 @@ function createBookCard(book) {
     cardTextBox.appendChild(cardDate);
     cardButtons.appendChild(cardReadBtn);
     cardButtons.appendChild(cardDeleteBtn);
-    
+
     return card;
 }
 
-function deleteBook(bookId) {
+function cardReadButton(bookId, cardReadBtn) {
+    const bookSelector = bookCollection.find(book => book.id === bookId);
+    if (bookSelector.read === true) {
+        cardReadBtn.setAttribute('class', 'card-read-book-btn');
+        cardReadBtn.textContent = 'Not readed';
+        bookSelector.read = false;
+        statusMenu();
+    } else {
+        cardReadBtn.setAttribute('class', 'card-read-book-btn-active');
+        bookSelector.read = true;
+        cardReadBtn.textContent = 'Read it';
+        statusMenu();
+    }
+
+
+}
+
+function cardDeleteBook(bookId) {
     bookCollection = bookCollection.filter(book => book.id !== bookId);
 
     // Find the corresponding card based on the bookId
@@ -221,12 +246,6 @@ function statusMenu() {
     numReadedBooks.textContent = totalReadBooks;
 
 }
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('1');
-    createAddBookBox();
-  });
 
 
 /*
