@@ -3,7 +3,7 @@
 const main = document.querySelector('main');
 //book card
 const cardReadBtn = document.getElementById('card-read-book-btn');
-const cardDeleteBtn = document.getElementById('card-delete-book-btn');
+//const cardDeleteBtn = document.getElementById('card-delete-book-btn');
 
 //overlay
 const overlayBox = document.getElementById('overlay');
@@ -29,7 +29,6 @@ overlayAddBtn.addEventListener('click', overlayCheckInput);
 overlayCancelBtn.addEventListener('click', overlayToggle);
 overlayReadBtn.addEventListener('click', readBookCheck);
 //cardReadBtn.addEventListener('click', none);
-//cardDeleteBtn.addEventListener('click', deleteBook);
 
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && checkOverflowStatus() === 'flex') {
@@ -46,7 +45,19 @@ document.addEventListener('keydown', function (event) {
 
 //FUNCTIONS
 
-//checks if the overlay is shown or no
+function createAddBookBox() {
+    console.log('2');
+    let addBookBox = document.createElement('div');
+    addBookBox.setAttribute('id', 'card-add-book-box');
+    let addBookBtn = document.createElement('button');
+    addBookBtn.setAttribute('type', 'button');
+    addBookBtn.setAttribute('id', 'add-new-book-btn');
+    addBookBtn.textContent = '+';
+    main.appendChild(addBookBox);
+    addBookBox.appendChild(addBookBtn);
+}
+
+//checks if the overlay is shown or not
 function checkOverflowStatus() {
     return window.getComputedStyle(overlayBox).display;
 }
@@ -66,7 +77,7 @@ function overlayCheckInput() {
     const authorInput = document.getElementById('overlay-author');
     const pagesInput = document.getElementById('overlay-pages');
     if (!titleInput.checkValidity() || !authorInput.checkValidity() || !pagesInput.checkValidity()) {
-            console.log('Error: check validity');
+        console.log('Error: check validity');
     } else {
         submitOverlayBook();
     }
@@ -75,11 +86,11 @@ function overlayCheckInput() {
 function readBookCheck() {
     if (overlayReadBtn.textContent === 'Read it? Yes') {
         overlayReadBtn.textContent = 'Read it? No';
-        overlayReadBtn.setAttribute('class', 'read-book-btn');
+        overlayReadBtn.setAttribute('class', 'card-read-book-btn');
         overlayReadStatus = false;
     } else {
         overlayReadBtn.textContent = 'Read it? Yes';
-        overlayReadBtn.setAttribute('class', 'read-book-btn-active');
+        overlayReadBtn.setAttribute('class', 'card-read-book-btn-active');
         overlayReadStatus = true;
     }
 }
@@ -95,6 +106,7 @@ function overlayClearInputs() {
     document.getElementById('overlay-title').value = '';
     document.getElementById('overlay-author').value = '';
     document.getElementById('overlay-pages').value = '';
+    resetReadStatus();
 }
 
 //saves the info of the new added book
@@ -118,9 +130,9 @@ function submitOverlayBook() {
 
 function generateID() {
     const length = 15;
-    let randomNumber = '';  
+    let randomNumber = '';
     for (let i = 0; i < length; i++) {
-      randomNumber += Math.floor(Math.random() * 10);
+        randomNumber += Math.floor(Math.random() * 10);
     }
     return randomNumber;
 }
@@ -154,13 +166,17 @@ function createBookCard(book) {
 
     let cardReadBtn = document.createElement('button');
     cardReadBtn.textContent = 'Read';
-    cardReadBtn.setAttribute('class', 'read-book-btn');
+    cardReadBtn.setAttribute('class', 'card-read-book-btn');
     cardReadBtn.setAttribute('type', 'button');
 
     let cardDeleteBtn = document.createElement('button');
-    cardDeleteBtn.setAttribute('class', 'delete-book-btn');
+    cardDeleteBtn.setAttribute('id', 'card-delete-book-btn');
+    cardDeleteBtn.setAttribute('class', 'card-delete-book-btn');
     cardDeleteBtn.textContent = 'Delete';
     cardDeleteBtn.setAttribute('type', 'button');
+    cardDeleteBtn.addEventListener('click', function() {
+        deleteBook(book.id);
+    });
 
     main.appendChild(card);
     card.appendChild(cardTextBox);
@@ -171,11 +187,24 @@ function createBookCard(book) {
     cardTextBox.appendChild(cardDate);
     cardButtons.appendChild(cardReadBtn);
     cardButtons.appendChild(cardDeleteBtn);
+    
+    return card;
 }
 
-/*function deleteBook() {
-    let a=0;
-}*/
+function deleteBook(bookId) {
+    bookCollection = bookCollection.filter(book => book.id !== bookId); // Remove book from the collection by ID
+    updateCards(); // Update the UI to reflect the changes
+}
+
+function updateCards() {
+    main.innerHTML = ''; // Clear the existing cards
+    bookCollection.forEach(book => {
+        const card = createBookCard(book);
+        main.appendChild(card); // Append the new card
+    });
+
+    statusMenu(); // Update the right menu statistics
+}
 
 
 //check and update the numbers in the right panel
@@ -197,11 +226,17 @@ function statusMenu() {
 
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('1');
+    createAddBookBox();
+  });
+
+
 /*
 NEXT:
 - delete button on overlay card
 - DONE - fix bug with enter key on overlay card
-- make the info panel work
-- status menu
-- readed books btn and right panel info
+- DONE - make the info panel work
+- readed books edit after adding them
 */
