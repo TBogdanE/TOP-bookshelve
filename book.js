@@ -97,6 +97,15 @@ function overlayClearInputs() {
     resetReadStatus();
 }
 
+function date() {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const year = currentDate.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+}
+
 //saves the info of the new added book
 function submitOverlayBook() {
     let bookInfo = {
@@ -104,7 +113,7 @@ function submitOverlayBook() {
         author: `- ${document.getElementById('overlay-author').value} -`,
         page: document.getElementById('overlay-pages').value,
         read: overlayReadStatus,
-        date: new Date(),
+        date: date(),
         id: generateID()
     }
     console.log(bookCollection);
