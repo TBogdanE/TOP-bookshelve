@@ -256,7 +256,7 @@ form {
     width: 100%;
 }
 
-.read-book-btn {
+.card-read-book-btn {
     width: 70%;
     height: 3em;
     color: white;
@@ -268,7 +268,7 @@ form {
     margin: 0.5em;
 }
 
-.read-book-btn-active {
+.card-read-book-btn-active {
     width: 70%;
     height: 3em;
     color: white;
@@ -280,15 +280,15 @@ form {
     margin: 0.5em;
 }
 
-.read-book-btn:hover {
+.card-read-book-btn:hover {
     filter: brightness(90%);
 }
 
-.read-book-btn:active {
+.card-read-book-btn:active {
     border: 0.3em solid rgb(75, 75, 75);
 }
 
-.delete-book-btn {
+.card-delete-book-btn {
     width: 70%;
     height: 3em;
     color: white;
@@ -299,11 +299,11 @@ form {
     overflow: hidden;
 }
 
-.delete-book-btn:hover {
+.card-delete-book-btn:hover {
     filter: brightness(90%);
 }
 
-.delete-book-btn:active {
+.card-delete-book-btn:active {
     border: 0.3em solid rgb(75, 75, 75);
 }
 

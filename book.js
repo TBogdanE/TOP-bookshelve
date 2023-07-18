@@ -33,7 +33,7 @@ overlayReadBtn.addEventListener('click', readBookCheck);
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && checkOverflowStatus() === 'flex') {
         overlayToggle();
-        resetReadStatus();
+        overlayClearInputs();
     } else if (event.key === 'Enter' && checkOverflowStatus() === 'flex') {
         if (event.target.tagName !== 'INPUT') {
             event.preventDefault();
@@ -44,18 +44,6 @@ document.addEventListener('keydown', function (event) {
 
 
 //FUNCTIONS
-
-function createAddBookBox() {
-    console.log('2');
-    let addBookBox = document.createElement('div');
-    addBookBox.setAttribute('id', 'card-add-book-box');
-    let addBookBtn = document.createElement('button');
-    addBookBtn.setAttribute('type', 'button');
-    addBookBtn.setAttribute('id', 'add-new-book-btn');
-    addBookBtn.textContent = '+';
-    main.appendChild(addBookBox);
-    addBookBox.appendChild(addBookBtn);
-}
 
 //checks if the overlay is shown or not
 function checkOverflowStatus() {
@@ -97,7 +85,7 @@ function readBookCheck() {
 
 function resetReadStatus() {
     overlayReadBtn.textContent = 'Read it? No';
-    overlayReadBtn.setAttribute('class', 'read-book-btn');
+    overlayReadBtn.setAttribute('class', 'card-read-book-btn');
     overlayReadStatus = false;
 }
 
@@ -125,7 +113,7 @@ function submitOverlayBook() {
     createBookCard(bookInfo);
     statusMenu();
     overlayToggle();
-    resetReadStatus();
+    overlayClearInputs();
 }
 
 function generateID() {
@@ -141,6 +129,7 @@ function generateID() {
 function createBookCard(book) {
     let card = document.createElement('div');
     card.setAttribute('class', 'card-book-box');
+    card.setAttribute('data-book-id', book.id);
 
     let cardTextBox = document.createElement('div');
     cardTextBox.setAttribute('class', 'card-book-box-text');
@@ -192,8 +181,15 @@ function createBookCard(book) {
 }
 
 function deleteBook(bookId) {
-    bookCollection = bookCollection.filter(book => book.id !== bookId); // Remove book from the collection by ID
-    updateCards(); // Update the UI to reflect the changes
+    bookCollection = bookCollection.filter(book => book.id !== bookId);
+
+    // Find the corresponding card based on the bookId
+    const cardToDelete = main.querySelector(`[data-book-id="${bookId}"]`);
+
+    if (cardToDelete) {
+        main.removeChild(cardToDelete); // Remove the card from the DOM
+        statusMenu();
+    }
 }
 
 function updateCards() {
