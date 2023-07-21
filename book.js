@@ -60,6 +60,7 @@ function overlayToggle() {
     }
 }
 
+//check the inputs
 function overlayCheckInput() {
     const titleInput = document.getElementById('overlay-title');
     const authorInput = document.getElementById('overlay-author');
@@ -71,6 +72,7 @@ function overlayCheckInput() {
     }
 }
 
+//checks if the book is read or not
 function readBookCheck() {
     if (overlayReadBtn.textContent === 'Read it? Yes') {
         overlayReadBtn.textContent = 'Read it? No';
@@ -83,6 +85,7 @@ function readBookCheck() {
     }
 }
 
+//resets the read status of the book, so, everytime when we acces the overlay, the read status to be the same
 function resetReadStatus() {
     overlayReadBtn.textContent = 'Read it? No';
     overlayReadBtn.setAttribute('class', 'card-read-book-btn');
@@ -97,7 +100,8 @@ function overlayClearInputs() {
     resetReadStatus();
 }
 
-function date() {
+//returns today date
+function getDate() {
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, '0');
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
@@ -113,7 +117,7 @@ function submitOverlayBook() {
         author: `- ${document.getElementById('overlay-author').value} -`,
         page: document.getElementById('overlay-pages').value,
         read: overlayReadStatus,
-        date: date(),
+        date: getDate(),
         id: generateID()
     }
     console.log(bookCollection);
@@ -125,6 +129,7 @@ function submitOverlayBook() {
     overlayClearInputs();
 }
 
+//generates a random number, that will be the ID of the card
 function generateID() {
     const length = 15;
     let randomNumber = '';
@@ -197,6 +202,7 @@ function createBookCard(book) {
     return card;
 }
 
+//updates the read status of the book
 function cardReadButton(bookId, cardReadBtn) {
     const bookSelector = bookCollection.find(book => book.id === bookId);
     if (bookSelector.read === true) {
@@ -214,26 +220,15 @@ function cardReadButton(bookId, cardReadBtn) {
 
 }
 
+//delete button will remove the book from the main section and from the bookCollection=[]
 function cardDeleteBook(bookId) {
     bookCollection = bookCollection.filter(book => book.id !== bookId);
-
     // Find the corresponding card based on the bookId
     const cardToDelete = main.querySelector(`[data-book-id="${bookId}"]`);
-
     if (cardToDelete) {
         main.removeChild(cardToDelete); // Remove the card from the DOM
         statusMenu();
     }
-}
-
-function updateCards() {
-    main.innerHTML = ''; // Clear the existing cards
-    bookCollection.forEach(book => {
-        const card = createBookCard(book);
-        main.appendChild(card); // Append the new card
-    });
-
-    statusMenu(); // Update the right menu statistics
 }
 
 
@@ -253,14 +248,15 @@ function statusMenu() {
     numBooks.textContent = totalBooks;
     numPages.textContent = totalPageCount;
     numReadedBooks.textContent = totalReadBooks;
+    console.log(bookCollection);
 
 }
 
 
 /*
 NEXT:
-- delete button on overlay card
+- DONE - delete button on overlay card
 - DONE - fix bug with enter key on overlay card
 - DONE - make the info panel work
-- readed books edit after adding them
+- DONE - readed books edit after adding them
 */
